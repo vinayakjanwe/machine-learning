@@ -20,5 +20,9 @@ grad = zeros(size(theta));
 % =============================================================
 H=sigmoid(X*theta);
 J=(sum(-y.*log(H)-(1-y).*log(1-H))/m)+(lambda/(2*m))*sum(theta.^2);
-grad=(sum((H-y).*X)/m)+(lambda/m).*theta;
+grad = (1 / m) .* X' * (h - y);
+
+regGrad = (lambda / m) .* theta;
+regGrad(1) =0;
+grad = grad + regGrad;
 end
